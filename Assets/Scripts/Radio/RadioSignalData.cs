@@ -10,6 +10,14 @@ public class RadioSignalData : ScriptableObject
     public int centerFrequency;
     public int bandwidth = 200;
 
+    public float GetSignalStrength(int frequency)
+    {
+        float distance = Mathf.Abs(frequency - centerFrequency);
+        float halfBand = bandwidth * 0.5f;
+
+        if (distance > halfBand) return 0f;
+        return 1f - (distance / halfBand);
+    }
     [Header("Audio")]
     public AudioClip staticClip;
     public AudioClip garbledClip;

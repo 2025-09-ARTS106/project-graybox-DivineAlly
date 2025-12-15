@@ -1,30 +1,25 @@
 using UnityEngine;
 
-public enum RadioBand
-{
-    AM,
-    FM,
-    MW,
-    LW
-}
-
 public class RadioController : MonoBehaviour
 {
-    [Header("Power State")]
-    public bool powerOn;
-    public bool muted;
+    [Header("Power")]
+    public bool powerOn = true;
+    public bool muted = false;
 
     [Header("Tuning")]
-    public RadioBand currentBand = RadioBand.AM;
-
     [Range(3, 6000)]
     public int frequency = 3000;
 
-    [Header("Signal")]
-    [Range(0f, 1f)]
-    public float signalStrength;
+    public RadioBand currentBand;
 
-    public RadioSignal currentSignal;
+    [Header("Signal State (Read Only)")]
+    public float signalStrength;
+    public RadioSignalData currentSignal;
+
+    void Start()
+    {
+        UpdateSignal();
+    }
 
     public void SetFrequency(int newFrequency)
     {
@@ -51,7 +46,7 @@ public class RadioController : MonoBehaviour
 
         if (currentSignal != null)
         {
-            signalStrength = currentSignal.GetStrength(frequency);
+            signalStrength = currentSignal.GetSignalStrength(frequency);
         }
         else
         {

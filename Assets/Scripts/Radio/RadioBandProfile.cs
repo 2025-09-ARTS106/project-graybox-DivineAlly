@@ -1,14 +1,5 @@
 using UnityEngine;
 
-using UnityEngine;
-
-public enum RadioBand
-{
-    AM,
-    FM,
-    MW,
-    LW
-}
 
 [CreateAssetMenu(menuName = "Radio/Band Profile")]
 public class RadioBandProfile : ScriptableObject
